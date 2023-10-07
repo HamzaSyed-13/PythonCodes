@@ -1,0 +1,88 @@
+print("Player 2 is computer\nDo you want to start the game? (Yes/No)")
+start = input("> ")
+
+numbers = []
+last = 0
+
+def check(numbers):
+  l=1
+  while l < len(numbers):
+    if (numbers[l]-numbers[l-1]) != 1:
+      return False
+    l+=1
+  return True
+
+if start == "Yes" or "yes" or "YES":
+  print("Enter 'F' to take the first chance.\nEnter 'S' to take the second chance.")
+  chance = input("> ")
+  if chance == "F" or "f":
+    while last != 21:
+      print("\nYour turn\n\nHow many numbers do you wish to enter?")
+      number = int(input("> "))
+      if number>0 and number<=3:
+         computer = 4 - number
+      else:
+         print("Wrong input. You are disqualified from the game.")
+         break
+      print("Enter your values:")
+      for i in range(0,number):
+         value = int(input("> "))
+         numbers.append(value)
+
+      last = numbers[-1]
+
+      if check(numbers)==True:
+         if last == 21:
+            print("You Lose!")
+         else:
+            for j in range(1, computer+1):
+                 k = last + j
+                 numbers.append(k)
+            print("Order of inputs after computer's turn is:")
+            print(numbers)
+            if last == 21:
+               print("Congratulations! You Won!")
+      else:
+         print("You did not enter consecutive numbers. You are disqualified from the game.")
+         break
+
+  elif chance == "S" or "s":
+    computer = 1
+    numbers.append(computer)
+    print("Order of inputs after computer's turn is:")
+    print(numbers)
+    while last != 21:
+        print("\nYour turn\n\nHow many numbers do you wish to enter?")
+        number = int(input("> "))
+        if number > 0 and number < 3:
+           computer = 4 - number
+        else:
+           print("Wrong input. You are disqualified from the game.")
+           break
+        print("Enter your values:")
+        for i in range(0,number):
+           value = int(input("> "))
+           numbers.append(value)
+
+        last = numbers[-1]
+
+        if check(numbers)==True:
+          if last == 21:
+             print("You Lose!")
+          else:
+             for j in range(1, computer+1):
+                 k = last + j
+                 numbers.append(k)
+          print("Order of inputs after computer's turn is:")
+          print(numbers)
+          if last == 21:
+              print("Congratulations! You Won!")
+        else:
+          print("You did not enter consecutive numbers. You are disqualified from the game.")
+          break
+
+elif start == "No" or "no" or "NO":
+  print("Goodbye!")
+
+else:
+  print("Please answer in either Yes or No.")
