@@ -1,0 +1,31 @@
+import random
+
+digits = random.randrange(1000,10000)
+
+guess = int(input("Guess the 4 digit number: "))
+
+if guess == digits:
+  print("Great! You guessed the number in just 1 try! You're a Mastermind!")
+else:
+  count = 0
+  while (guess != digits):
+    count += 1
+    digits = str(digits)
+    guess = str(guess)
+    correct = ["X"]*4
+    counter = 0
+    for a in range(0,4):
+      if guess[a] == digits[a]:
+        counter += 1
+        correct[a] = guess[a]
+    if counter < 4 and counter != 0:
+      print("Not quite right. You have guessed", counter, "digit(s) correct.\nThese are the digit(s) you got correct:")
+      for b in range(0,4):
+        print(correct[b])
+      guess = int(input("\nEnter your next choice of numbers: "))
+    elif counter == 0:
+      print("None of the numbers in your input match.")
+      guess = int(input("\nEnter your next choice of numbers: "))
+
+  if guess == digits:
+    print("You've become a Mastermind!\nIt only took you", count, "tries.")
